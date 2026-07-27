@@ -27,6 +27,21 @@
   .wrap{max-width:720px; margin:0 auto; padding:20px 16px 90px;}
   header.top{margin-bottom:18px; padding:4px 2px;}
   .badge-date{display:inline-block; font-size:12px; color:var(--blue-strong); background:var(--blue-soft); font-weight:700; padding:6px 12px; border-radius:999px; margin-bottom:12px;}
+  .freshness-check{display:inline-block; font-size:12px; font-weight:800; padding:6px 12px; border-radius:999px; margin:0 0 12px 6px;}
+  .freshness-check.ok{color:var(--green-text); background:var(--green-soft);}
+  .freshness-check.warn{color:var(--amber-text); background:var(--amber-soft);}
+  .freshness-check.bad{color:var(--red-text); background:var(--red-soft);}
+  .fresh-tag{display:inline-block; font-size:10px; font-weight:800; padding:2px 7px; border-radius:999px; margin-left:6px; color:var(--muted); background:var(--line); vertical-align:middle;}
+  .fresh-tag.new{color:var(--green-text); background:var(--green-soft);}
+  .fresh-tag.stale{color:var(--red-text); background:var(--red-soft);}
+  .card[data-type="official"]{border-left:4px solid var(--blue); padding-left:14px;}
+  .card[data-type="news"]{border-left:4px solid var(--green); padding-left:14px;}
+  .card[data-type="blog"]{border-left:4px solid var(--muted); padding-left:14px;}
+  .card[data-type="cafe"]{border-left:4px solid var(--purple); padding-left:14px;}
+  .verify-log{background:var(--panel2); border-radius:16px; padding:14px 16px; font-size:12.5px; color:var(--sub); margin-bottom:16px;}
+  .verify-log b{color:var(--text);}
+  .verify-log .vl-item{padding:6px 0; border-top:1px solid var(--line);}
+  .verify-log .vl-item:first-of-type{border-top:none;}
   h1{font-size:26px; margin:0 0 8px; letter-spacing:-0.5px; font-weight:800; color:var(--text);}
   .lead{color:var(--sub); font-size:14px; margin:0; font-weight:500;}
 
@@ -137,7 +152,8 @@
 
   <div id="grp1">
   <header class="top">
-    <span class="badge-date">📅 2026.07.27 업데이트 · 매일 자동 갱신</span>
+    <span class="badge-date" id="badge-date" data-date="2026-07-27">📅 2026.07.27 업데이트 · 매일 자동 갱신</span>
+    <span class="freshness-check" id="freshness-check"></span>
     <h1>경빈이 수억벌기 프로젝트 🩷</h1>
     <p class="lead">⭐ 상도14구역 메인 트래킹 | 상도16·15구역 비교 참고 | 뉴스 · 블로그 · 카페 자동 수집 대시보드</p>
   </header>
@@ -151,6 +167,12 @@
     <a href="#sec-refs">참고사이트</a>
     <a href="#sec-check">체크포인트</a>
   </nav>
+
+  <div class="verify-log">
+    <b>🔍 검증/정정 이력</b> (투명하게 공개 — 잘못된 내용은 바로 여기에 기록됩니다)
+    <div class="vl-item">2026.07.27 — 상도14구역 "사업시행자 지정 임박" 표기 오류 정정: 실제로는 2025.10 코리아신탁 사업시행자 지정 완료(신탁방식) 확인, 반영함.</div>
+    <div class="vl-item">2026.07.27 — 날짜 배지가 실제 갱신일과 다르게 표시되던 UTC/KST 시간대 계산 오류 수정.</div>
+  </div>
 
   <div class="brief">
     <h2>오늘의 핵심 요약</h2>
@@ -247,51 +269,51 @@
     </div>
 
     <div class="card" style="background:var(--amber-soft);">
-      <div class="meta"><span class="src">📌 정정 안내</span><span class="date">2026.07.27</span></div>
+      <div class="meta"><span class="src">📌 정정 안내</span><span class="date" data-date="2026-07-27">2026.07.27</span></div>
       <p class="desc" style="color:var(--text); font-weight:600;">그동안 "사업시행자 지정 임박"으로 표기했던 부분을 정정합니다. 실제로는 2025년 4월 정비구역 지정, 같은 해 10월 코리아신탁이 사업시행자로 공식 지정·고시되어 이미 신탁방식으로 사업이 진행 중입니다. 신탁방식은 조합을 구성하지 않고 신탁회사가 직접 시행하는 방식이라, 정비사업 정보몽땅에 조합원 수가 0명으로 뜨는 것은 정상입니다(조합이 아예 없기 때문). 아래 공식 사업개요와 근거 기사를 함께 확인하세요.</p>
     </div>
-    <div class="card" style="background:var(--blue-soft);">
-      <div class="meta"><span class="src">🏛️ 서울시 정비사업 정보몽땅 (공식)</span><span class="date">확인일 2026.07.26</span></div>
+    <div class="card" data-type="official" style="background:var(--blue-soft);">
+      <div class="meta"><span class="src">🏛️ 서울시 정비사업 정보몽땅 (공식)</span><span class="date" data-date="2026-07-26">확인일 2026.07.26</span></div>
       <a class="title" href="https://cleanup.seoul.go.kr/cafe/mastr-cleanup-bsnsSumry/execute.do?cafeId=590900001381W49&stepSeCode=102&div=sumry" target="_blank">상도14구역 주택정비형 재개발사업 — 공식 사업개요</a>
       <p class="desc" style="color:var(--text);">정비구역 면적 50,788.45㎡ · 제2종 일반주거지역 · 건폐율 25% · 용적률 250% · 최고높이 86m · 지상29층/지하3층 · 13개동 · 분양 1,191세대(전용60㎡이하 869 / 60~85㎡ 322) + 임대 151세대. "추진위 수행여부 N"·조합원 0명은 신탁방식이라 조합이 없어서이며, 초기 단계라는 뜻이 아닙니다.</p>
     </div>
-    <div class="card">
-      <div class="meta"><span class="src">한국경제</span><span class="date">2025.10.20</span></div>
+    <div class="card" data-type="news">
+      <div class="meta"><span class="src">한국경제</span><span class="date" data-date="2025-10-20">2025.10.20</span></div>
       <a class="title" href="https://www.hankyung.com/article/2025102092426" target="_blank">코리아신탁, 상도14구역 재개발 사업시행자 지정</a>
       <p class="desc">동작구가 코리아신탁을 상도14구역 사업시행자로 지정·고시. 4월 정비계획·구역지정 완료 후 6개월 만에 사업시행자 지정까지 완료되며 빠르게 진행 중이라고 보도.</p>
     </div>
-    <div class="card">
-      <div class="meta"><span class="src">디지털타임스</span><span class="date">2024.12.25</span></div>
+    <div class="card" data-type="news">
+      <div class="meta"><span class="src">디지털타임스</span><span class="date" data-date="2024-12-25">2024.12.25</span></div>
       <a class="title" href="https://www.dt.co.kr/article/11635392" target="_blank">상도 14·15구역 등 신통기획 정비구역 지정…분담금 최대 9천만원↓</a>
       <p class="desc">상도14구역은 용적률 인센티브로 조합원(참여자) 1인당 평균 약 6,000만원 분담금이 줄어들 것으로 전망. 상도15구역은 약 3,000만원 절감 전망.</p>
     </div>
-    <div class="card">
-      <div class="meta"><span class="src">G밸리뉴스</span><span class="date">2026.07.24</span></div>
+    <div class="card" data-type="news">
+      <div class="meta"><span class="src">G밸리뉴스</span><span class="date" data-date="2026-07-24">2026.07.24</span></div>
       <a class="title" href="https://www.g-enews.com/view.php?ud=2026072315421962602aa6f4cdad_1" target="_blank">흑석·노량진 넘어 상도까지…상도15구역과 맞닿은 상도14구역도 사업에 속도</a>
       <p class="desc">상도15구역 시공사 선정 훈풍을 타고 바로 옆 상도14구역도 사업 속도가 붙고 있다는 분석. 신대방삼거리역 인근 입지 강조.</p>
     </div>
-    <div class="card">
-      <div class="meta"><span class="src">네이버블로그 · 흑석동 재개발 전문 중앙공인</span><span class="date">2026.07.24</span></div>
+    <div class="card" data-type="blog">
+      <div class="meta"><span class="src">네이버블로그 · 흑석동 재개발 전문 중앙공인</span><span class="date" data-date="2026-07-24">2026.07.24</span></div>
       <a class="title" href="https://blog.naver.com/bestinceo/224356433255" target="_blank">「상도14구역」 재개발 경매 등장 | 2025타경104625 상세 소개</a>
       <p class="desc">신속통합기획 상도14구역 내 경매 매물 소개, 서울중앙지방법원 진행. 다세대 경매 사례 분석.</p>
     </div>
-    <div class="card">
-      <div class="meta"><span class="src">네이버블로그 · 집토피아경매</span><span class="date">2026.07.22</span></div>
+    <div class="card" data-type="blog">
+      <div class="meta"><span class="src">네이버블로그 · 집토피아경매</span><span class="date" data-date="2026-07-22">2026.07.22</span></div>
       <a class="title" href="https://blog.naver.com/ziptopia182/224354099175" target="_blank">2025타경104625 상도14구역 신통기획 시공사선정 임박 경매 물건 분석</a>
       <p class="desc">1,191세대 규모 개발 진행 상황과 함께 경매 물건의 감정가·시세 비교, 신통기획 호재 반영 여부 분석.</p>
     </div>
-    <div class="card">
-      <div class="meta"><span class="src">서울경제</span><span class="date">2026.07.25</span></div>
+    <div class="card" data-type="news">
+      <div class="meta"><span class="src">서울경제</span><span class="date" data-date="2026-07-25">2026.07.25</span></div>
       <a class="title" href="https://n.news.naver.com/mnews/article/011/0004645034?sid=101" target="_blank">GTX 연신내역 품는 갈현1구역, 4467가구 대단지 확정</a>
       <p class="desc">은평구 갈현1구역(4,467가구) 정비계획 확정 소식을 전하며 "동작구 대표 재개발 지역인 상도14·15구역(4,395가구)보다 큰 규모"라고 언급. 상도14구역이 여전히 서울 재개발 규모 비교 기준으로 언론에 인용되고 있음.</p>
     </div>
-    <div class="card">
-      <div class="meta"><span class="src">네이버블로그 · 노량진스마트부동산</span><span class="date">2026.07.25</span></div>
+    <div class="card" data-type="blog">
+      <div class="meta"><span class="src">네이버블로그 · 노량진스마트부동산</span><span class="date" data-date="2026-07-25">2026.07.25</span></div>
       <a class="title" href="https://blog.naver.com/kuk4749/224357497272" target="_blank">상도15구역 신속통합·대우 하이앤드 써밋 선정 — 상도14구역 시너지 분석</a>
       <p class="desc">상도15구역 시공사 선정 이후 인접한 상도14구역(약 1,190세대)과 상도11구역, 모아타운 등을 합쳐 6,000세대 이상의 신흥 주거타운으로 재편될 것이란 전망. 이주비 LTV 100% 등 대우건설 금융 조건도 상도14구역 협상에 참고 지표가 될 수 있음.</p>
     </div>
-    <div class="card">
-      <div class="meta"><span class="src">매일일보(m-i.kr)</span><span class="date">2026.07.26</span></div>
+    <div class="card" data-type="news">
+      <div class="meta"><span class="src">매일일보(m-i.kr)</span><span class="date" data-date="2026-07-26">2026.07.26</span></div>
       <a class="title" href="https://www.m-i.kr/news/articleView.html?idxno=1395034" target="_blank">다시 꿈틀하는 오피스텔·빌라시장…동작구 상도동 빌라 경매도 '후끈'</a>
       <p class="desc">지난 7일 동작구 상도동 일원 감정가 4억2,800만원짜리 빌라가 9명 경합 끝에 2회차 경매에서 낙찰가율 98.48%(4억2,150만원)에 낙찰. 역세권 신축 빌라 인기와 전월세난이 겹치며 재개발 기대지역 경매 관심이 계속 이어지는 흐름.</p>
     </div>
@@ -311,33 +333,33 @@
       <div class="stat"><div class="k">목표</div><div class="v">연내 정비구역 지정</div></div>
     </div>
 
-    <div class="card">
+    <div class="card" data-type="news">
       <div class="meta"><span class="src">디벨로퍼뉴스</span><span class="date">2026.07 (최근)</span></div>
       <a class="title" href="https://www.dpnews.co.kr/news/articleView.html?idxno=1428" target="_blank">상도16구역, 속도 붙은 동의율…"연내 정비구역 지정 목표"</a>
       <p class="desc">추진위원장 인터뷰: 동의서 징구 진행 중, 신통기획 후보지 선정 당시 이미 60% 초과 동의 확보.</p>
     </div>
-    <div class="card">
-      <div class="meta"><span class="src">건설경제(dnews)</span><span class="date">2026.07.21</span></div>
+    <div class="card" data-type="news">
+      <div class="meta"><span class="src">건설경제(dnews)</span><span class="date" data-date="2026-07-21">2026.07.21</span></div>
       <a class="title" href="https://www.dnews.co.kr/uhtml/view.jsp?idxno=202607201154339830674" target="_blank">상도16구역 재개발 설계사 수주전…2파전으로 압축</a>
       <p class="desc">프리미엄 권역 선별 수주 기조 속 토문건축·원양건축 2곳으로 설계 입찰 압축.</p>
     </div>
-    <div class="card">
-      <div class="meta"><span class="src">아루뉴스(추진위 공고)</span><span class="date">2026.06.24</span></div>
+    <div class="card" data-type="news">
+      <div class="meta"><span class="src">아루뉴스(추진위 공고)</span><span class="date" data-date="2026-06-24">2026.06.24</span></div>
       <a class="title" href="https://www.arunews.com/news/articleView.html?idxno=64173" target="_blank">상도16구역 추진위 설계자·법률자문·감정평가·회계세무 업체 선정 입찰공고 4건</a>
       <p class="desc">추진위 실무 착수 신호. 협력업체 선정이 본격화되고 있음을 시사.</p>
     </div>
-    <div class="card">
-      <div class="meta"><span class="src">네이버블로그 · 집토피아경매</span><span class="date">2026.07.21</span></div>
+    <div class="card" data-type="blog">
+      <div class="meta"><span class="src">네이버블로그 · 집토피아경매</span><span class="date" data-date="2026-07-21">2026.07.21</span></div>
       <a class="title" href="https://blog.naver.com/ziptopia182/224353094646" target="_blank">2025타경103131 상도16구역 재개발 호재! 시세 대비 경매가 분석</a>
       <p class="desc">감정가 3.6억(최저가 100%), 대지권 35.62평, 경매기일 2026.07.30, 서울중앙지법 진행. 청구금액 3.15억.</p>
     </div>
-    <div class="card">
-      <div class="meta"><span class="src">네이버블로그 · 서울 급매 경매 부동산 정보</span><span class="date">2026.07.20</span></div>
+    <div class="card" data-type="blog">
+      <div class="meta"><span class="src">네이버블로그 · 서울 급매 경매 부동산 정보</span><span class="date" data-date="2026-07-20">2026.07.20</span></div>
       <a class="title" href="https://blog.naver.com/gilhoon7575/224350364890" target="_blank">상도동재개발빌라 | 상도16구역빌라경매 | 2025타경103131 상세분석</a>
       <p class="desc">2020년 신축급 빌라, 인근 유사 물건 비교 소개. 입지·감정가 대비 시세 분석.</p>
     </div>
-    <div class="card">
-      <div class="meta"><span class="src">네이버블로그 · 삶의 새로운 지평</span><span class="date">2026.07.22</span></div>
+    <div class="card" data-type="blog">
+      <div class="meta"><span class="src">네이버블로그 · 삶의 새로운 지평</span><span class="date" data-date="2026-07-22">2026.07.22</span></div>
       <a class="title" href="https://blog.naver.com/skyrice7/224354613368" target="_blank">23명 입찰한 상도24구역 vs 2명 입찰한 상도16구역 — 경매 경쟁률 비교</a>
       <p class="desc">구역별 사업 속도 차이가 경매 입찰 경쟁률에도 반영되는 사례로 소개.</p>
     </div>
@@ -357,38 +379,38 @@
       <div class="stat"><div class="k">세대수</div><div class="v">3,207세대 · 30개동</div></div>
     </div>
 
-    <div class="card">
-      <div class="meta"><span class="src">G밸리뉴스</span><span class="date">2026.07.24</span></div>
+    <div class="card" data-type="news">
+      <div class="meta"><span class="src">G밸리뉴스</span><span class="date" data-date="2026-07-24">2026.07.24</span></div>
       <a class="title" href="https://www.g-enews.com/view.php?ud=2026072315421962602aa6f4cdad_1" target="_blank">흑석·노량진 넘어 상도까지...동작구에 '하이엔드' 주거 브랜드 몰린다</a>
       <p class="desc">대우건설, 푸르지오 대신 하이엔드 브랜드 '상도 써밋' 제안 배경 분석.</p>
     </div>
-    <div class="card">
-      <div class="meta"><span class="src">메디컬헤럴드저널</span><span class="date">2026.07.21</span></div>
+    <div class="card" data-type="news">
+      <div class="meta"><span class="src">메디컬헤럴드저널</span><span class="date" data-date="2026-07-21">2026.07.21</span></div>
       <a class="title" href="https://www.mhj21.com/news/articleView.html?idxno=253211" target="_blank">대우건설, 상도15구역 재개발 시공사로 '공사비 1조4,367억원'</a>
       <p class="desc">동작구 상도동 279번지 일원, 지하8층~지상35층, 부대복리시설 포함 규모 상세.</p>
     </div>
-    <div class="card">
-      <div class="meta"><span class="src">SBS/와우TV(네이버뉴스)</span><span class="date">2026.07.21</span></div>
+    <div class="card" data-type="news">
+      <div class="meta"><span class="src">SBS/와우TV(네이버뉴스)</span><span class="date" data-date="2026-07-21">2026.07.21</span></div>
       <a class="title" href="https://n.news.naver.com/mnews/article/215/0001259456?sid=101" target="_blank">"신축 못 살바엔"...영끌 막히자 '몸테크족' 몰려간 곳</a>
       <p class="desc">현지 공인중개사 코멘트: 상도동 인근 매물 품귀, 나오는 즉시 거래되는 상황.</p>
     </div>
-    <div class="card">
-      <div class="meta"><span class="src">네이버블로그 · 레이어스블랙</span><span class="date">2026.07.24</span></div>
+    <div class="card" data-type="blog">
+      <div class="meta"><span class="src">네이버블로그 · 레이어스블랙</span><span class="date" data-date="2026-07-24">2026.07.24</span></div>
       <a class="title" href="https://blog.naver.com/layersblack/224356505698" target="_blank">상도15구역 현재진행단계 및 타임라인</a>
       <p class="desc">정비구역 지정부터 현재까지 단계별 타임라인 정리, 재개발 사업 중 가장 빠른 속도로 평가.</p>
     </div>
-    <div class="card">
-      <div class="meta"><span class="src">네이버블로그 · 노량진 더원부동산</span><span class="date">2026.07.24</span></div>
+    <div class="card" data-type="blog">
+      <div class="meta"><span class="src">네이버블로그 · 노량진 더원부동산</span><span class="date" data-date="2026-07-24">2026.07.24</span></div>
       <a class="title" href="https://blog.naver.com/theone_realty/224356460952" target="_blank">상도15구역 '상도 써밋' 설계 공개 | 4,600평 중앙광장 등</a>
       <p class="desc">공개된 설계안 상세(중앙광장, 커뮤니티 시설 등) 소개.</p>
     </div>
-    <div class="card">
-      <div class="meta"><span class="src">네이버카페 · 오늘은, 데이투어</span><span class="date">2026.07.21</span></div>
+    <div class="card" data-type="cafe">
+      <div class="meta"><span class="src">네이버카페 · 오늘은, 데이투어</span><span class="date" data-date="2026-07-21">2026.07.21</span></div>
       <a class="title" href="https://cafe.naver.com/mokholight/704" target="_blank">상도15구역 재개발 수주 요약 (서울시 정비사업 정보몽땅 자료 기반)</a>
       <p class="desc">공식 정비사업 정보몽땅 데이터 인용, 시공사 선정 총회 진행 경과 정리.</p>
     </div>
-    <div class="card">
-      <div class="meta"><span class="src">네이버블로그 · 맛집찾아 임장하며 집보는 밥품러</span><span class="date">2026.07.26</span></div>
+    <div class="card" data-type="blog">
+      <div class="meta"><span class="src">네이버블로그 · 맛집찾아 임장하며 집보는 밥품러</span><span class="date" data-date="2026-07-26">2026.07.26</span></div>
       <a class="title" href="https://blog.naver.com/doou____/224358060206" target="_blank">대우건설 상도15구역 1.4조 수주 뒤에 숨은 팩트 (비판적 시각)</a>
       <p class="desc">3,200세대 '상도써밋'으로 재탄생할 상도15구역 수주 소식이 겉보기엔 완벽해 보이지만, 이면의 리스크(분담금·부동산 양극화 우려 등)를 짚는 블로거 시각. 투자 판단 전 다양한 관점 참고용.</p>
     </div>
@@ -473,5 +495,44 @@
   </div>
 
 </div>
+<script>
+(function(){
+  function daysBetween(a,b){ return Math.floor((b - a) / 86400000); }
+  function parseKST(dateStr){ return new Date(dateStr + 'T00:00:00+09:00'); }
+
+  var nowKST = new Date(new Date().toLocaleString('en-US', {timeZone:'Asia/Seoul'}));
+  var today0 = new Date(nowKST.getFullYear(), nowKST.getMonth(), nowKST.getDate());
+
+  // 1) 전체 페이지 신선도 자가진단 배지
+  var badge = document.getElementById('badge-date');
+  var check = document.getElementById('freshness-check');
+  if(badge && check && badge.dataset.date){
+    var bd = parseKST(badge.dataset.date);
+    var bd0 = new Date(bd.getFullYear(), bd.getMonth(), bd.getDate());
+    var diff = daysBetween(bd0, today0);
+    if(diff <= 0){ check.textContent = '✅ 오늘 갱신 확인됨'; check.className = 'freshness-check ok'; }
+    else if(diff === 1){ check.textContent = '🟡 어제 이후 갱신 안 됨'; check.className = 'freshness-check warn'; }
+    else { check.textContent = '🔴 ' + diff + '일째 갱신 안 됨 — 자동화 확인 필요'; check.className = 'freshness-check bad'; }
+  }
+
+  // 2) 카드별 상대 날짜 태그 (오늘/N일 전)
+  document.querySelectorAll('[data-date]').forEach(function(node){
+    if(node.id === 'badge-date') return;
+    var d = parseKST(node.dataset.date);
+    var d0 = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    var diff = daysBetween(d0, today0);
+    var label, cls;
+    if(diff <= 0){ label = '오늘'; cls = 'fresh-tag new'; }
+    else if(diff === 1){ label = '어제'; cls = 'fresh-tag new'; }
+    else if(diff < 7){ label = diff + '일 전'; cls = 'fresh-tag'; }
+    else if(diff < 30){ label = Math.floor(diff/7) + '주 전'; cls = 'fresh-tag stale'; }
+    else { label = Math.floor(diff/30) + '개월 전'; cls = 'fresh-tag stale'; }
+    var tag = document.createElement('span');
+    tag.className = cls;
+    tag.textContent = label;
+    node.appendChild(tag);
+  });
+})();
+</script>
 </body>
 </html>
