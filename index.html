@@ -2,8 +2,20 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>상도동 재개발 인사이트 · 상도14구역 중심</title>
+
+<!-- PWA: 홈 화면에 추가하면 앱처럼 열림 -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#3182F6">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="경빈이 프로젝트">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+
 <style>
   :root{
     /* Toss 스타일 라이트 팔레트 */
@@ -533,6 +545,13 @@
     node.appendChild(tag);
   });
 })();
+
+// PWA: 홈 화면 앱처럼 오프라인에서도 열리도록 서비스워커 등록
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
 </script>
 </body>
 </html>
